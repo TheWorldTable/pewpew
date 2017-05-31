@@ -2,6 +2,16 @@
 <head>
 <meta charset="utf-8">
 <style>
+#attackdiv,
+#aboutdiv {
+  display: none;
+}
+
+#Xtitlediv {
+  font-size: 26px;
+  padding-top: 24px;
+}
+    
 body {
   margin: 0;
   padding: 0;
@@ -18,7 +28,20 @@ body {
   color:white;
   background-color:black;
   padding:5px;
-  top:0px;
+  top:20px;
+}
+
+#subtitlediv {
+  font-family: monospace;
+  text-align: center;
+  font-size:32px;
+  position:fixed;
+  width:100%;
+  height:50px;
+  color:white;
+  background-color:black;
+  padding:5px;
+  top:72px;
   overflow-y: auto;
 }
 
@@ -32,7 +55,6 @@ body {
   background-color:black;
   padding:5px;
   bottom:0px;
-  overflow-y: auto;
 }
 
 #container1 {
@@ -67,6 +89,24 @@ body {
   position:fixed;
   padding:5px;
   color: white;
+}
+
+#note {
+  font-family: sans-serif;
+  text-align: center;
+  font-size:12px;
+  position:fixed;
+  width:100%;
+  color: #222;
+  padding:5px;
+  bottom: 6px;
+  overflow-y: auto;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+#note:hover {
+  color: #666;
 }
 
 #about {display:none;}
@@ -113,7 +153,7 @@ function about() {
 </head>
 
 <body>
-
+  <!--
   <audio id="starwars" src="Blaster-Solo.wav" preload="auto"></audio>
   <audio id="tng" src="tng_torpedo_clean.mp3" preload="auto"></audio>
   <audio id="b5" src="B5-interceptor1.wav" preload="auto"></audio>
@@ -123,9 +163,13 @@ function about() {
   <audio id="asteroids" src="asteroids.mp3" preload="auto"></audio>
   <audio id="china" src="china.mp3" preload="auto"></audio>
   <audio id="timallen" src="timallen.wav" preload="auto"></audio>
+  -->
+  <audio id="pew" src="CleanPew.mp3" preload="auto"></audio>
 
   <center><div id="container1"></div></center>
-  <div id="titlediv">IPew Attack Map</div>
+  <div id="titlediv">The World Table</div>
+  <div id="subtitlediv">Global Comment Monitor</div>
+  <div id="note" title="as in totally fake">This is only a dramitization</div>
   <div id="attackdiv"></div>
   <div id="aboutdiv"><i class="fa fa-question-circle fa-2x" onClick="about();"></i></div>
 
@@ -215,7 +259,7 @@ function about() {
     var greenattacks = $.getUrlVar("greenattacks")
     var redattacks = $.getUrlVar("redattacks")
 
-    snd_id = "starwars" ;
+    snd_id = "pew" ;
     if (typeof tng !== 'undefined') { snd_id = "tng" ; }
     if (typeof b5 !== 'undefined') { snd_id = "b5" ; }
     if (typeof wargames !== 'undefined') { snd_id = "wargames" ; }
@@ -230,7 +274,7 @@ function about() {
       attack_max=200;
     }
 
-    if (typeof org_name !== 'undefined') { $("#titlediv").text(decodeURI(org_name) + " IPew Attack Map").html() }
+    if (typeof org_name !== 'undefined') { $("#titlediv").text(decodeURI(org_name) || "World Table World Table Uncivil Comment Monitor").html() }
 
     // we maintain a fixed queue of "attacks" via this class
     function FixedQueue( size, initialValues ){
